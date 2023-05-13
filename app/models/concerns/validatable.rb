@@ -14,11 +14,11 @@ module Validatable
   included do
     def self.validate_name(field = :first_name)
       validates field, presence: true,
-                length: RANGE_NAME_LENGTH,
-                format: {
-                  with: REGEXP_NAME,
-                  message: 'Only space or hyphen'
-                }
+                       length: RANGE_NAME_LENGTH,
+                       format: {
+                         with: REGEXP_NAME,
+                         message: 'Only space or hyphen'
+                       }
     end
 
     def self.validate_birth_date
@@ -27,22 +27,27 @@ module Validatable
 
     def self.validate_phone_number
       validates :phone_number, presence: true,
-                numericality: true,
-                length: RANGE_NAME_LENGTH,
-                format: {
-                  with: REGEXP_PHONE_NUMBER,
-                  message: 'First symbol must be plus and after it only numbers'
-                }
+                               numericality: true,
+                               length: RANGE_NAME_LENGTH,
+                               format: {
+                                 with: REGEXP_PHONE_NUMBER,
+                                 message: 'First symbol must be plus and after it only numbers'
+                               }
     end
 
     def self.validate_password
       validates :password, presence: true,
-                length: RANGE_PASSWORD_LENGTH,
-                format: {
-                  with: REGEXP_PASSWORD,
-                  message: 'Only English letters, must contain at least one capital letter,
+                           length: RANGE_PASSWORD_LENGTH,
+                           format: {
+                             with: REGEXP_PASSWORD,
+                             message: 'Only English letters, must contain at least one capital letter,
                                      1 lowercase letter and 1 number'
-                }
+                           }
+    end
+
+    def self.validate_work_experience
+      validates :work_experience, presence: true,
+                                  numericality: true
     end
   end
 end
