@@ -3,6 +3,10 @@
 Rails.application.routes.draw do
   root 'articles#index'
 
-  resources :clients
-  resources :doctors
+  resources :clients do
+    resources :visits, only: %i[index show create delete]
+  end
+  resources :doctors do
+    resources :visits, only: %i[index show update]
+  end
 end
