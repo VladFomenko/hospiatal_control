@@ -6,6 +6,7 @@ module Validatable
   RANGE_NAME_LENGTH = 2..30
   RANGE_PASSWORD_LENGTH = 8..30
   RANGE_PHONE_NUMBER_LENGTH = 10..15
+  RANGE_RECOMMENDATION_LENGTH = 200..3000
 
   REGEXP_NAME = /\A[A-Za-zА-Яа-яІіЇїЄє]+([- ]?[A-Za-zА-Яа-яІіЇїЄє]+)*\z/
   REGEXP_PHONE_NUMBER = /\A\+\d\z/
@@ -48,6 +49,11 @@ module Validatable
     def self.validate_work_experience
       validates :work_experience, presence: true,
                                   numericality: true
+    end
+
+    def self.validate_recommendation
+      validates :recommendation,
+                format: { with: RANGE_RECOMMENDATION_LENGTH, message: 'Your recommendation must have to 200..3000 symbol'}
     end
   end
 end
