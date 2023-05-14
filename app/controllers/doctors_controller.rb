@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 class DoctorsController < ApplicationController
+  include Doctorable
+
   before_action :doctor_params, only: %i[create update]
   before_action :set_doctors, only: :index
   before_action :set_doctor, only: %i[show update destroy]
@@ -33,6 +37,10 @@ class DoctorsController < ApplicationController
     @doctor.destroy
   end
 
+  def set_category
+    change_category(@doctor, doctor_params[:category])
+  end
+
   private
 
   def set_doctors
@@ -44,6 +52,6 @@ class DoctorsController < ApplicationController
   end
 
   def doctor_params
-    params.doctor.permit(:first_name, :second_name, :password, :work_experience)
+    params.doctor.permit(:first_name, :second_name, :password, :work_experience, :category)
   end
 end

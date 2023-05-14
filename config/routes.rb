@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   end
   resources :doctors do
     resources :visits, only: %i[index show update]
+    post 'set_category', on: :member
   end
 end
