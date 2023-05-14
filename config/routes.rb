@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'articles#index'
+  devise_for :doctors
+  devise_for :clients
+
+  root 'home#index'
 
   resources :clients do
     resources :visits, only: %i[index show create delete]
