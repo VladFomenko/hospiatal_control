@@ -3,5 +3,6 @@
 class Client < ApplicationRecord
   include Clientable
 
-  # has_many :doctors, through: visits
+  has_many :visits, dependent: :destroy
+  has_many :doctors, through: :visits
 end
