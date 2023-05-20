@@ -17,19 +17,11 @@ class CategoriesController < ApplicationController
   def create
     category = Category.create(category_params)
 
-    if category.save
-
-    else
-
-    end
+    return unless category.save
   end
 
   def update
-    if @category.update(category_params)
-
-    else
-
-    end
+    return unless @category.update(category_params)
   end
 
   def destroy

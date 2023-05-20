@@ -13,22 +13,17 @@ class ClientsController < ApplicationController
     @client
   end
 
-  def create
-    client = Client.create(client_params)
-
-    if client.save
-
-    else
-
-    end
-  end
+  def create; end
 
   def update
     if @client.update(client_params)
-
+      flash[:notice] = 'The update has been successfully completed'
+      flash[:notice_class] = 'alert-success'
     else
-
+      flash[:notice] = 'Failed to update'
+      flash[:notice_class] = 'alert-danger'
     end
+    redirect_to client_path(current_client)
   end
 
   def destroy
@@ -42,10 +37,10 @@ class ClientsController < ApplicationController
   end
 
   def set_client
-    @client = Client.find(params[:id])
+    @client = current_client || Client.find(params[:client])
   end
 
   def client_params
-    params.client.permit(:first_name, :second_name, :birth_date, :phone_number, :password)
+    params.require(:client).permit(:first_name, :second_name, :birth_date, :phone_number)
   end
 end
