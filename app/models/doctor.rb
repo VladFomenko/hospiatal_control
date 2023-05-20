@@ -10,4 +10,16 @@ class Doctor < ApplicationRecord
   has_many :visits, dependent: :destroy
   has_many :clients, through: :visits
   has_many :categories, dependent: :destroy
+
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
+  end
+
+  def will_save_change_to_email?
+    false
+  end
 end

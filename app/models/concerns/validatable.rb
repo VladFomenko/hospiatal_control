@@ -35,7 +35,7 @@ module Validatable
                              with: Constable::REGEXP_PASSWORD,
                              message: 'Only English letters, must contain at least one capital letter,
                                      1 lowercase letter and 1 number'
-                           }
+                           }, if: :password_required?
     end
 
     def self.validate_work_experience
@@ -48,5 +48,11 @@ module Validatable
                 format: { with: Constable::RANGE_RECOMMENDATION_LENGTH,
                           message: 'Your recommendation must have to 200..3000 symbol' }
     end
+  end
+
+  private
+
+  def password_required?
+    attribute_changed?(:password)
   end
 end
