@@ -1,0 +1,19 @@
+<%= form_for([current_doctor, @visit]) do |f| %>
+  <div class="row mt-2">
+    <div class="col-md-6">
+      <%= f.label :date_of_visit %>
+      <p><%= @visit.date_of_visit.strftime('%d.%m.%Y') %></p>
+    </div>
+    <div class="col-md-6">
+      <%= f.label :status %>
+      <%= f.text_field :status, value: @visit.status, readonly: true, disabled: true %>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <%= f.label :recommendation %>
+      <%= f.text_area :recommendation, value: @visit.recommendation, rows: 5, class: 'form-control' %>
+    </div>
+  </div>
+  <%= f.submit 'Update Visit', class: 'btn btn-primary mt-3' %>
+<% end %>
