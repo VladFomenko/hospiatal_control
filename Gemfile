@@ -51,6 +51,13 @@ gem 'bootsnap', require: false
 # Use for authorization
 gem 'devise'
 
+# Use for page style
+gem 'bootstrap'
+
+# Use for turbo-link for bootstrap
+gem 'jquery-rails'
+gem 'popper_js'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
