@@ -1,7 +1,7 @@
 databases:
-  - name: hospital_control_app_production
-    databaseName: hospital_control_app_production
-    user: deployer
+  - name: hospital_control_app
+    databaseName: hospital_control_app
+    user: hospital_control_app
 
 services:
   - type: web
