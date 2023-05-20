@@ -1,0 +1,37 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col"><%= link_to 'Day of visit', sort_column: 'date_of_visit' %></th>
+    <th scope="col"><%= link_to 'Status', sort_column: 'status' %></th>
+    <% if current_client.present? %>
+      <th scope="col"><%= link_to 'Doctor', sort_column: 'doctor_id' %></th>
+    <% else %>
+      <th scope="col"><%= link_to 'Client', sort_column: 'doctor_id' %></th>
+    <% end %>
+    <th scope="col">Recommendation</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @visits.each.with_index do |visit, index| %>
+    <tr>
+      <th scope="row"><%= index + 1 %></th>
+      <td><%= link_to visit.date_of_visit.strftime('%d.%m.%Y'), client_visit_path(client_id: visit.client_id, id: visit.id) %></td>
+      <td><%= visit.status %></td>
+      <% if current_client.present? %>
+        <td><%= link_to visit.doctor.first_name, doctor_path(visit.doctor) %></td>
+      <% else %>
+        <td><%= link_to visit.client.first_name, client_path(visit.client, client: visit.client) %></td>
+      <% end %>
+      <td><%= visit.recommendation %></td>
+      <% if current_doctor %>
+        <td><%= link_to 'Add recommendation', edit_doctor_visit_path(current_doctor, visit), method: :patch %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% if current_client.present? %>
+  <%= link_to 'Create Visit', new_client_visit_path(current_client), class: 'btn btn-primary' %>
+<% end %>
+

@@ -1,0 +1,40 @@
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+        <span class="font-weight-bold">Your name: <%= current_client.first_name %></span>
+        <span class="font-weight-bold">Your surname: <%= current_client.second_name %></span>
+        <span class="font-weight-bold">Your birthday: <%= current_client.birth_date.strftime('%d.%m.%Y') %></span>
+      </div>
+    </div>
+    <div class="col-md-5 border-right">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right">Profile Settings</h4>
+        </div>
+        <% if flash[:notice].present? %>
+          <div class="alert <%= flash[:notice_class] %>" role="alert">
+            <%= flash[:notice] %>
+          </div>
+        <% end %>
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <label class="labels">First Name:</label>
+            <span><%= current_client.first_name %></span>
+          </div>
+          <div class="col-md-6">
+            <label class="labels">Surname:</label>
+            <span><%= current_client.second_name %></span>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <label class="labels">Phone Number:</label>
+            <span><%= current_client.phone_number %></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
