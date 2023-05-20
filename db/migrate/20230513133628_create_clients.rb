@@ -3,11 +3,9 @@
 class CreateClients < ActiveRecord::Migration[7.0]
   def up
     create_table :clients do |t|
-      t.string :first_name
-      t.string :second_name
-      t.datetime :birth_date
-      t.string :phone_number
-      t.string :password
+      t.string :first_name, null: false
+      t.string :second_name, null: false
+      t.datetime :birth_date, null: false
 
       t.timestamps
     end

@@ -1,0 +1,65 @@
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 280px;">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
+    <svg class="bi me-2" width="40" height="32">
+      <use xlink:href="#bootstrap"></use>
+    </svg>
+    <span class="fs-4">Menu</span>
+  </a>
+  <hr>
+  <% if current_client.present? %>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <%= link_to client_path(current_client), class: "nav-link #{'active' if current_page?(client_path(current_client))}", "aria-current": "page" do %>
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          Your profile
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to client_visits_path(current_client), class: "nav-link #{'active' if current_page?(client_visits_path(current_client))}", "aria-current": "page" do %>
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          Your visits
+        <% end %>
+      </li>
+      <li>
+        <%= link_to doctors_path, class: "nav-link #{'active' if current_page?(doctors_path)}", "aria-current": "page" do %>
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#table"></use>
+          </svg>
+          Doctors
+        <% end %>
+      </li>
+      <li>
+        <%= link_to new_client_visit_path(client_id: current_client.id), class: "nav-link #{'active' if current_page?(new_client_visit_path(client_id: current_client.id))}", "aria-current": "page" do %>
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#table"></use>
+          </svg>
+          Create visit
+        <% end %>
+      </li>
+    </ul>
+  <% else %>
+    <ul class="nav nav-pills flex-column mb-auto">
+      <li class="nav-item">
+        <%= link_to doctor_path(current_doctor), class: "nav-link #{'active' if current_page?(doctor_path(current_doctor))}", "aria-current": "page" do %>
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          Your profile
+        <% end %>
+      </li>
+      <li class="nav-item">
+        <%= link_to doctor_visits_path(current_doctor), class: "nav-link #{'active' if current_page?(doctor_visits_path(current_doctor))}", "aria-current": "page" do %>
+          <svg class="bi me-2" width="16" height="16">
+            <use xlink:href="#home"></use>
+          </svg>
+          Your visits
+        <% end %>
+      </li>
+    </ul>
+  <% end %>
+  <hr>
+</div>

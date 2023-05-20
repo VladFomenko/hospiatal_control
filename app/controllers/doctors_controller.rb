@@ -15,23 +15,9 @@ class DoctorsController < ApplicationController
     @doctor
   end
 
-  def create
-    doctor = Doctor.create(doctor_params)
+  def create; end
 
-    if doctor.save
-
-    else
-
-    end
-  end
-
-  def update
-    if @doctor.update(doctor_params)
-
-    else
-
-    end
-  end
+  def update; end
 
   def destroy
     @doctor.destroy
@@ -44,11 +30,13 @@ class DoctorsController < ApplicationController
   private
 
   def set_doctors
-    @doctors = Doctor.all
+    sort_column = params[:sort_column]
+
+    @doctors = Doctor.all.sort_by { |doctor| doctor[sort_column] }
   end
 
   def set_doctor
-    @doctor = Doctor.find(params[:id])
+    @doctor = Doctor.all.find(params[:id])
   end
 
   def doctor_params
