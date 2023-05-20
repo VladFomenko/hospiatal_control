@@ -32,3 +32,6 @@
 
 # Ignore RubyMine config direcoty
 .idea/
+
+# Ignire passwords
+.env
