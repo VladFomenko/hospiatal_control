@@ -1,0 +1,27 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col"><%= link_to 'Name', sort_column: 'first_name' %></th>
+    <th scope="col"><%= link_to 'Surname', sort_column: 'second_name' %></th>
+    <th scope="col"><%= link_to 'Work experience, month', sort_column: 'work_experience' %></th>
+    <th scope="col"><%= link_to 'Category', sort_column: 'category' %></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @doctors.each.with_index do |doctor, index| %>
+    <tr>
+      <th scope="row"><%= index + 1 %></th>
+      <td><%= link_to doctor.first_name, doctor_path(doctor) %></td>
+      <td><%= doctor.second_name %></td>
+      <td><%= doctor.work_experience %></td>
+      <td>
+        <% if doctor.categories.first %>
+          <%= doctor.categories.first.name %>
+        <% else %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
