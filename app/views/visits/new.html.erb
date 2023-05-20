@@ -1,0 +1,15 @@
+<%= form_for([current_client, @visit]) do |f| %>
+  <div class="field">
+    <%= f.label :date_of_visit %>
+    <%= f.date_field :date_of_visit %>
+  </div>
+
+  <div class="field">
+    <%= f.label :doctor_id %>
+    <%= f.collection_select :doctor_id, Doctor.all, :id, :first_name, prompt: true %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit 'Create Visit', class: 'btn btn-primary' %>
+  </div>
+<% end %>
