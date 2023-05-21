@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.17.2"
 
-set :repo_url, 'https://github.com/VladFomenko/hospital_control'
+set :repo_url, 'git@github.com:VladFomenko/hospital_control.git'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :branch, ENV['BRANCH'] || 'main'
 
