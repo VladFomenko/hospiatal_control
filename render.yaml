@@ -1,5 +1,5 @@
 databases:
-  - name: hospital_control_app
+  - name: postgres
     databaseName: hospital_control_app
     user: hospital_control_app
 
@@ -8,7 +8,7 @@ services:
     name: hospital_control_app
     env: ruby
     buildCommand: "./bin/render-build.sh"
-    startCommand: "bundle exec puma -C config/puma.rb"
+    startCommand: bundle exec rails s
     envVars:
       - key: DATABASE_URL
         fromDatabase:
