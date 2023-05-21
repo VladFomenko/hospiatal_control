@@ -81,4 +81,6 @@ test:
 #
 production:
   <<: *default
-  url: <%= ENV["DATABASE_URL"] %>
+  database: hospital_control_app
+  username: deployer
+  password: <%= ENV["MINI_JIRA_DATABASE_PASSWORD"] %>
