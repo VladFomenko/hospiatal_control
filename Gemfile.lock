@@ -308,6 +308,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
+  execjs
   importmap-rails
   jbuilder
   jquery-rails
