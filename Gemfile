@@ -70,6 +70,14 @@ group :development, :test do
 end
 
 group :development do
+  # Use for deploy
+  gem 'capistrano'
+  gem 'capistrano-rvm'
+  gem 'capistrano-rails'
+  gem 'capistrano3-puma'
+  gem 'capistrano-nginx'
+  gem 'capistrano-upload-config'
+  gem 'sshkit-sudo'
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem 'web-console'
 

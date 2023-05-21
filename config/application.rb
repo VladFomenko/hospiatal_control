@@ -33,5 +33,7 @@ module HospitalControlApp
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    Dotenv.load(File.join(Rails.root, 'config', '.env'))
   end
 end

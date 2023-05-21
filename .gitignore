@@ -34,4 +34,7 @@
 .idea/
 
 # Ignire passwords
-.env
+config/.env
+config/.env.production
+/config/database.production.yml
+/config/secrets.production.yml
