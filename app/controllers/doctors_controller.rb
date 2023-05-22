@@ -7,6 +7,8 @@ class DoctorsController < ApplicationController
   before_action :set_doctors, only: :index
   before_action :set_doctor, only: %i[show update destroy]
 
+  load_and_authorize_resource
+
   def index
     @doctors
   end
@@ -29,6 +31,11 @@ class DoctorsController < ApplicationController
 
   private
 
+  def current_ability
+    user = current_client || current_doctor
+    @current_ability ||= Ability.new(user)
+  end
+
   def set_doctors
     sort_column = params[:sort_column]
 
@@ -36,7 +43,7 @@ class DoctorsController < ApplicationController
   end
 
   def set_doctor
-    @doctor = Doctor.all.find(params[:id])
+    @doctor = Doctor.find(params[:id])
   end
 
   def doctor_params

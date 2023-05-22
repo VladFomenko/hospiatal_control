@@ -1,4 +1,4 @@
-<%= form_for([current_doctor, @visit]) do |f| %>
+<%= form_for(@visit, url: doctor_visit_path(current_doctor, @visit), method: :patch) do |f| %>
   <div class="row mt-2">
     <div class="col-md-6">
       <%= f.label :date_of_visit %>
