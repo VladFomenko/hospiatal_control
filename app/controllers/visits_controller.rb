@@ -4,7 +4,12 @@ class VisitsController < ApplicationController
   before_action :visit_params, only: %i[create update]
   before_action :set_visits, only: :index
   before_action :set_visit, only: %i[show update destroy edit]
-  before_action :current_dynamic_user, only: %i[create show]
+
+  load_and_authorize_resource :doctor
+  load_and_authorize_resource :doctor, through: :visits
+
+  load_and_authorize_resource :client
+  load_and_authorize_resource :client, through: :visits
 
   def index
     @visits
@@ -49,14 +54,19 @@ class VisitsController < ApplicationController
 
   private
 
+  def current_ability
+    user = current_client || current_doctor
+    @current_ability ||= Ability.new(user)
+  end
+
   def set_visits
     sort_column = params[:sort_column]
 
-    @visits = current_dynamic_user.visits.sort_by { |visit| visit[sort_column] }
+    @visits = @current_dynamic_user.visits.sort_by { |visit| visit[sort_column] }
   end
 
   def set_visit
-    @visit = Visit.find(params[:id])
+    @visit = @current_dynamic_user.visits.find(params[:id])
   end
 
   def check_quantity_visits?

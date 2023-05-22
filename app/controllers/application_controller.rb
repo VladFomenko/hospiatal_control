@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_dynamic_user
-    @current_dynamic_user ||= current_client || current_doctor
+    @current_dynamic_user = Client.find_by_id(params[:client_id]) || Doctor.find_by_id(params[:doctor_id])
   end
 
   private

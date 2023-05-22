@@ -5,6 +5,8 @@ class ClientsController < ApplicationController
   before_action :set_clients, only: :index
   before_action :set_client, only: %i[show update destroy]
 
+  load_and_authorize_resource
+
   def index
     @clients
   end
@@ -32,12 +34,17 @@ class ClientsController < ApplicationController
 
   private
 
+  def current_ability
+    user = current_client || current_doctor
+    @current_ability ||= Ability.new(user)
+  end
+
   def set_clients
     @clients = Client.all
   end
 
   def set_client
-    @client = current_client || Client.find(params[:client])
+    @client = Client.find(params[:id])
   end
 
   def client_params
