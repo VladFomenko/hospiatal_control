@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class VisitsController < ApplicationController
+  before_action :current_dynamic_user, only: %i[index show create update edit]
   before_action :visit_params, only: %i[create update]
   before_action :set_visits, only: :index
   before_action :set_visit, only: %i[show update destroy edit]

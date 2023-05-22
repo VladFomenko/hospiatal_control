@@ -16,12 +16,18 @@
   <% @visits.each.with_index do |visit, index| %>
     <tr>
       <th scope="row"><%= index + 1 %></th>
+      <% if current_client %>
       <td><%= link_to visit.date_of_visit.strftime('%d.%m.%Y'), client_visit_path(client_id: visit.client_id, id: visit.id) %></td>
+        <% elsif current_doctor %>
+        <td><%= link_to visit.date_of_visit.strftime('%d.%m.%Y'), doctor_visit_path(client_id: visit.client_id, id: visit.id) %></td>
+        <% else %>
+        <td><%= link_to visit.date_of_visit.strftime('%d.%m.%Y') %></td>
+        <% end %>
       <td><%= visit.status %></td>
       <% if current_client.present? %>
         <td><%= link_to visit.doctor.first_name, doctor_path(visit.doctor) %></td>
       <% else %>
-        <td><%= link_to visit.client.first_name, client_path(visit.client, client: visit.client) %></td>
+        <td><%= link_to visit.client.first_name, client_path(visit.client) %></td>
       <% end %>
       <td><%= visit.recommendation %></td>
       <% if current_doctor %>

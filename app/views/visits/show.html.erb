@@ -18,5 +18,5 @@
   </tbody>
 </table>
 <% if current_doctor %>
-  <%= link_to 'Add recommendation', edit_doctor_visit_path(@current_dynamic_user, @visit), method: :patch %>
+  <%= link_to 'Add recommendation', edit_doctor_visit_path(current_doctor, @visit), method: :patch %>
 <% end %>
