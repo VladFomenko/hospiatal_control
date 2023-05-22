@@ -88,6 +88,7 @@ GEM
       popper_js (>= 2.11.6, < 3)
       sassc-rails (>= 2.0.0)
     builder (3.2.4)
+    cancancan (3.5.0)
     capistrano (3.17.2)
       airbrussh (>= 1.0.0)
       i18n
@@ -299,6 +300,7 @@ DEPENDENCIES
   administrate
   bootsnap
   bootstrap
+  cancancan
   capistrano
   capistrano-nginx
   capistrano-rails
