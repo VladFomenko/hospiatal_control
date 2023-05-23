@@ -25,3 +25,10 @@
   <% end %>
   </tbody>
 </table>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <%= render partial: 'shared/pagi', locals: { pages: @doctors } %>
+    </div>
+  </div>
+</div>
