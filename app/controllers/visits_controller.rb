@@ -35,7 +35,7 @@ class VisitsController < ApplicationController
   def update
     if @visit.update(visit_params)
       @visit.inactive!
-      redirect_to doctor_visit_path(@visit)
+      redirect_to doctor_visit_path(current_doctor, @visit)
     else
       render :edit, notice: 'Failed to update visit'
     end
