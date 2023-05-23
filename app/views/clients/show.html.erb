@@ -1,34 +1,38 @@
-<div class="container rounded bg-white mt-5 mb-5">
-  <div class="row">
-    <div class="col-md-3 border-right">
-      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+<div class="row">
+  <div class="col-md-3 border-right">
+    <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+      <% if @client.avatar.attached? %>
+        <%= image_tag @client.avatar, class: "rounded-circle mt-5", width: "150px" %>
+      <% else %>
         <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
-      </div>
+      <% end %>
     </div>
-    <div class="col-md-5 border-right">
-      <div class="p-3 py-5">
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          <h4 class="text-right"><%= @client.first_name + ' ' + @client.second_name %> </h4>
-        </div>
-
-        <div class="row mt-2">
-          <div class="col-md-6">
-            <label class="labels" for="doctor_first_name">First Name</label>
-            <input type="text" class="form-control" id="doctor_first_name" value="<%= @client.first_name %>" readonly disabled/>
-          </div>
-          <div class="col-md-6">
-            <label class="labels" for="doctor_second_name">Surname</label>
-            <input type="text" class="form-control" id="doctor_second_name" value="<%= @client.second_name %>" readonly disabled/>
-          </div>
-        </div>
-        <div class="row mt-3">
-          <div class="col-md-12">
-            <label class="labels" for="doctor_phone_number">Phone Number</label>
-            <input type="text" class="form-control" id="doctor_phone_number" value="<%= @client.phone_number %>" readonly disabled/>
-          </div>
-        </div>
-
+  </div>
+  <div class="col-md-5 border-right">
+    <div class="p-3 py-5">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h4 class="text-right"><%= @client.first_name + ' ' + @client.second_name %> </h4>
       </div>
+
+      <div class="row mt-2">
+        <div class="col-md-6">
+          <label class="labels" for="client_first_name">First Name</label>
+          <input type="text" class="form-control" id="client_first_name" value="<%= @client.first_name %>" readonly disabled/>
+        </div>
+        <div class="col-md-6">
+          <label class="labels" for="client_second_name">Surname</label>
+          <input type="text" class="form-control" id="client_second_name" value="<%= @client.second_name %>" readonly disabled/>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-md-12">
+          <label class="labels" for="client_phone_number">Phone Number</label>
+          <input type="text" class="form-control" id="client_phone_number" value="<%= @client.phone_number %>" readonly disabled/>
+        </div>
+      </div>
+      <% if current_client.present? %>
+        <%= link_to 'Edit', edit_client_path(@client) %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -19,13 +19,10 @@ class ClientsController < ApplicationController
 
   def update
     if @client.update(client_params)
-      flash[:notice] = 'The update has been successfully completed'
-      flash[:notice_class] = 'alert-success'
+      redirect_to client_path(@client), notice: 'Client updated successfully'
     else
-      flash[:notice] = 'Failed to update'
-      flash[:notice_class] = 'alert-danger'
+      render :edit, notice: 'Failed to update'
     end
-    redirect_to client_path(current_client)
   end
 
   def destroy
@@ -48,6 +45,6 @@ class ClientsController < ApplicationController
   end
 
   def client_params
-    params.require(:client).permit(:first_name, :second_name, :birth_date, :phone_number)
+    params.require(:client).permit(:first_name, :second_name, :birth_date, :phone_number, :avatar)
   end
 end

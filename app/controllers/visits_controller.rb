@@ -63,7 +63,10 @@ class VisitsController < ApplicationController
   def set_visits
     sort_column = params[:sort_column]
 
-    @visits = @current_dynamic_user.visits.sort_by { |visit| visit[sort_column] }
+    sorted_visits = @current_dynamic_user.visits.sort_by { |visit| visit[sort_column] }
+    @visits = Kaminari.paginate_array(sorted_visits).page(params[:page]).per(10)
+
+    @total_pages = @visits.total_pages
   end
 
   def set_visit
