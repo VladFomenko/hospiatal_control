@@ -7,6 +7,8 @@ class Client < ApplicationRecord
          :recoverable, :rememberable, :validatable
   include Clientable
 
+  has_one_attached :avatar
+
   has_many :visits, dependent: :destroy
   has_many :doctors, through: :visits
 

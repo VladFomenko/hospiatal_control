@@ -19,7 +19,13 @@ class DoctorsController < ApplicationController
 
   def create; end
 
-  def update; end
+  def update
+    if @doctor.update(doctor_params)
+      redirect_to doctor_path(@doctor), notice: 'Doctor updated successfully'
+    else
+      render :edit, notice: 'Failed to update'
+    end
+  end
 
   def destroy
     @doctor.destroy
@@ -39,7 +45,10 @@ class DoctorsController < ApplicationController
   def set_doctors
     sort_column = params[:sort_column]
 
-    @doctors = Doctor.all.sort_by { |doctor| doctor[sort_column] }
+    sorted_visits = Doctor.all.sort_by { |doctor| doctor[sort_column] }
+    @doctors = Kaminari.paginate_array(sorted_visits).page(params[:page]).per(10)
+
+    @total_pages = @doctors.total_pages
   end
 
   def set_doctor
@@ -47,6 +56,6 @@ class DoctorsController < ApplicationController
   end
 
   def doctor_params
-    params.doctor.permit(:first_name, :second_name, :password, :work_experience, :category)
+    params.require(:doctor).permit(:first_name, :second_name, :password, :work_experience, :avatar)
   end
 end
