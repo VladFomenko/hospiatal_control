@@ -11,7 +11,7 @@ class Doctor < ApplicationRecord
 
   has_many :visits, dependent: :destroy
   has_many :clients, through: :visits
-  has_many :categories, dependent: :destroy
+  belongs_to :category, optional: true
 
   def email_required?
     false

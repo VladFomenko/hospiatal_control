@@ -3,5 +3,5 @@
 class Category < ApplicationRecord
   include Categorizable
 
-  belongs_to :doctor
+  has_many :doctor
 end
