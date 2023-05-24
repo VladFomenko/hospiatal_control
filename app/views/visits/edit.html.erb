@@ -15,8 +15,8 @@
         </div>
         <div class="row mt-3">
           <div class="col-md-12">
-            <%= f.label :recommendation %>
-            <%= f.text_area :recommendation, value: @visit.recommendation, rows: 5, class: 'form-control' %>
+            <%= f.label :recommendation%>
+            <%= f.text_field :recommendation, id: 'visit_recommendation', value: @visit.recommendation, rows: 5, class: 'form-control' %>
           </div>
         </div>
         <div class="row mt-3 justify-content-center">
