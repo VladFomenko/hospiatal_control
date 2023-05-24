@@ -27,8 +27,8 @@
           </div>
           <div class="col-md-6">
             <label class="labels" for="doctor_second_name">Category</label>
-            <% if @doctor.categories.first %>
-              <input type="text" class="form-control" id="doctor_second_name" value="<%= @doctor.categories.first.name %>" readonly disabled/>
+            <% if @doctor.category_id.present? %>
+              <input type="text" class="form-control" id="doctor_second_name" value="<%= Category.find(@doctor.category_id).name %>" readonly disabled/>
             <% else %>
               <input type="text" class="form-control" id="doctor_second_name" value="" readonly disabled/>
             <% end %>

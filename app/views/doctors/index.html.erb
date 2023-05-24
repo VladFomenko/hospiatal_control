@@ -16,8 +16,8 @@
       <td><%= doctor.second_name %></td>
       <td><%= doctor.work_experience %></td>
       <td>
-        <% if doctor.categories.first %>
-          <%= doctor.categories.first.name %>
+        <% if doctor.category_id.present? %>
+          <%= Category.find(doctor.category_id).name %>
         <% else %>
         <% end %>
       </td>

@@ -29,10 +29,10 @@
             </div>
             <div class="col-md-6">
               <label class="labels" for="doctor_category">Category</label>
-              <% if @doctor.categories.first %>
-                <%= f.text_field :category, value: @doctor.categories.first.name, class: 'form-control', id: 'doctor_category' %>
+              <% if @doctor.category_id.present? %>
+                <%= f.collection_select :category_id, Category.all, :id, :name, { selected: @doctor.category.id }, class: 'form-control', id: 'doctor_category' %>
               <% else %>
-                <%= f.text_field :category, class: 'form-control', id: 'doctor_category' %>
+                <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: 'Select category' }, class: 'form-control', id: 'category' %>
               <% end %>
             </div>
           </div>
