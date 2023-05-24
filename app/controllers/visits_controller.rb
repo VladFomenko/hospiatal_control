@@ -35,9 +35,11 @@ class VisitsController < ApplicationController
   def update
     if @visit.update(visit_params)
       @visit.inactive!
+      flash[:success] = 'Update was successful'
       redirect_to doctor_visit_path(current_doctor, @visit)
     else
-      render :edit, notice: 'Failed to update visit'
+      flash[:success] = @visit.errors.full_messages.join(', ')
+      redirect_to edit_doctor_visit_path(current_doctor, @visit)
     end
   end
 
@@ -49,9 +51,9 @@ class VisitsController < ApplicationController
     @visit = current_client.visits.build
   end
 
-  def edit
-    @visit
-  end
+  # def edit
+  #   @visit
+  # end
 
   private
 

@@ -21,9 +21,11 @@ class DoctorsController < ApplicationController
 
   def update
     if @doctor.update(doctor_params)
-      redirect_to doctor_path(@doctor), notice: 'Doctor updated successfully'
+      flash[:success] = 'Update was successful'
+      redirect_to doctor_path(@doctor)
     else
-      render :edit, notice: 'Failed to update'
+      flash[:errors] = @doctor.errors.full_messages.join(', ')
+      redirect_to edit_doctor_path(@doctor)
     end
   end
 

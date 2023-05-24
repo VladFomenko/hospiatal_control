@@ -19,9 +19,11 @@ class ClientsController < ApplicationController
 
   def update
     if @client.update(client_params)
-      redirect_to client_path(@client), notice: 'Client updated successfully'
+      flash[:success] = 'Update was successful'
+      redirect_to client_path(@client)
     else
-      render :edit, notice: 'Failed to update'
+      flash[:errors] = @client.errors.full_messages.join(', ')
+      redirect_to edit_client_path(@client)
     end
   end
 

@@ -1,3 +1,4 @@
+<%= render 'shared/flash_msg', flash: flash %>
 <div class="container rounded bg-white mt-5 mb-5">
   <div class="row">
     <div class="col-md-3 border-right">
@@ -14,8 +15,6 @@
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h4 class="text-right"><%= @doctor.first_name + ' ' + @doctor.second_name %> </h4>
         </div>
-
-        <%= render 'shared/errors', object: @doctor %>
 
         <%= form_for @doctor, url: doctor_path(@doctor), method: :patch do |f| %>
           <%= f.file_field :avatar %>
@@ -43,9 +42,9 @@
               <%= f.text_field :phone_number, class: 'form-control', id: 'doctor_phone_number' %>
             </div>
           </div>
-
           <%= f.submit 'Save', class: 'btn btn-primary' %>
-        <% end %>
+      <% end %>
+
       </div>
     </div>
   </div>
