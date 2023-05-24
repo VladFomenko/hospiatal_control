@@ -20,7 +20,7 @@ class DoctorsController < ApplicationController
   def create; end
 
   def update
-    if @doctor.update(doctor_params)
+    if @doctor.update!(doctor_params)
       flash[:success] = 'Update was successful'
       redirect_to doctor_path(@doctor)
     else
@@ -31,10 +31,6 @@ class DoctorsController < ApplicationController
 
   def destroy
     @doctor.destroy
-  end
-
-  def set_category
-    change_category(@doctor, doctor_params[:category])
   end
 
   private
@@ -58,6 +54,6 @@ class DoctorsController < ApplicationController
   end
 
   def doctor_params
-    params.require(:doctor).permit(:first_name, :second_name, :password, :work_experience, :avatar)
+    params.require(:doctor).permit(:first_name, :second_name, :password, :work_experience, :avatar, :category_id)
   end
 end
