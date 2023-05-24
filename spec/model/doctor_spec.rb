@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Doctor, type: :model do
   it 'is valid with a valid phone number' do
-    doctor = Doctor.new(first_name: FFaker::Name.first_name,
-                        second_name: FFaker::Name.last_name,
-                        work_experience: FFaker::Number.number,
-                        phone_number: FFaker::PhoneNumberUA.international_mobile_phone_number)
+    doctor = FactoryBot.build(:doctor)
     expect(doctor).to be_valid
   end
 
