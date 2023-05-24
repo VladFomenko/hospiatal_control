@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Doctorable
+module DoctorableController
   extend ActiveSupport::Concern
 
   def change_category(doctor, category)

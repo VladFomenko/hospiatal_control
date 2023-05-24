@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   end
   resources :doctors do
     resources :visits, only: %i[index show update edit]
-    post 'set_category', on: :member
   end
+
+  resources :categories
 end

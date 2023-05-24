@@ -1,19 +1,31 @@
-<%= form_for([current_doctor, @visit]) do |f| %>
-  <div class="row mt-2">
-    <div class="col-md-6">
-      <%= f.label :date_of_visit %>
-      <p><%= @visit.date_of_visit.strftime('%d.%m.%Y') %></p>
-    </div>
-    <div class="col-md-6">
-      <%= f.label :status %>
-      <%= f.text_field :status, value: @visit.status, readonly: true, disabled: true %>
+<div class="container">
+  <div class="row justify-content-center">
+    <%= render 'shared/flash_msg', flash: flash %>
+    <div class="col-md-8">
+      <%= form_for(@visit, url: doctor_visit_path(current_doctor, @visit), method: :patch) do |f| %>
+        <div class="row mt-2">
+          <div class="col-md-6">
+            <%= f.label :date_of_visit %>
+            <p><%= @visit.date_of_visit.strftime('%d.%m.%Y') %></p>
+          </div>
+          <div class="col-md-6">
+            <%= f.label :status %>
+            <%= f.text_field :status, value: @visit.status, readonly: true, disabled: true, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <%= f.label :recommendation %>
+            <%= f.text_area :recommendation, value: @visit.recommendation, rows: 5, class: 'form-control' %>
+          </div>
+        </div>
+        <div class="row mt-3 justify-content-center">
+          <div class="col-md-6">
+            <%= f.submit 'Update Visit', class: 'btn btn-primary btn-block' %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
-  <div class="row mt-3">
-    <div class="col-md-12">
-      <%= f.label :recommendation %>
-      <%= f.text_area :recommendation, value: @visit.recommendation, rows: 5, class: 'form-control' %>
-    </div>
-  </div>
-  <%= f.submit 'Update Visit', class: 'btn btn-primary mt-3' %>
-<% end %>
+</div>
+

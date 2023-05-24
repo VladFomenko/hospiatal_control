@@ -9,7 +9,7 @@ class DoctorDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    categories: Field::HasMany,
+    category: Field::BelongsTo,
     clients: Field::HasMany,
     encrypted_password: Field::String,
     first_name: Field::String,
@@ -21,7 +21,7 @@ class DoctorDashboard < Administrate::BaseDashboard
     visits: Field::HasMany,
     work_experience: Field::Number,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime
+    updated_at: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -31,15 +31,14 @@ class DoctorDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
-    categories
-    visits
+    category
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    categories
+    category
     clients
     encrypted_password
     first_name
@@ -58,17 +57,12 @@ class DoctorDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    categories
-    clients
-    encrypted_password
     first_name
-    phone_number
-    remember_created_at
-    reset_password_sent_at
-    reset_password_token
     second_name
-    visits
+    phone_number
     work_experience
+    encrypted_password
+    category
   ].freeze
 
   # COLLECTION_FILTERS

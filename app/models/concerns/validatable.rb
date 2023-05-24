@@ -48,6 +48,11 @@ module Validatable
                 format: { with: Constable::RANGE_RECOMMENDATION_LENGTH,
                           message: 'Your recommendation must have to 200..3000 symbol' }
     end
+
+
+    def self.uniq_name_category
+      validates :name, uniqueness: true
+    end
   end
 
   private

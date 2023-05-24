@@ -1,10 +1,16 @@
 # frozen_string_literal: true
 
 class VisitsController < ApplicationController
+  before_action :current_dynamic_user, only: %i[index show create update edit]
   before_action :visit_params, only: %i[create update]
   before_action :set_visits, only: :index
   before_action :set_visit, only: %i[show update destroy edit]
-  before_action :current_dynamic_user, only: %i[create show]
+
+  load_and_authorize_resource :doctor
+  load_and_authorize_resource :doctor, through: :visits
+
+  load_and_authorize_resource :client
+  load_and_authorize_resource :client, through: :visits
 
   def index
     @visits
@@ -17,21 +23,22 @@ class VisitsController < ApplicationController
   def create
     @visit ||= @current_dynamic_user.visits.build(visit_params)
 
-    if check_quantity_visits? && @visit.save!
-      redirect_to client_visit_path(current_client, @visit), notice: 'Visit successfully created'
+    if check_quantity_visits? && @visit.save
+      redirect_to client_visit_path(current_client, @visit)
     else
-      flash[:notice] = 'Failed to create visit'
-      flash[:notice_class] = 'alert-danger'
-      render :new
+      check_quantity_visits? ? flash[:errors] = 'Failed to create visit' : flash[:errors] = 'This doctor can no longer have visits'
+      redirect_to new_client_visit_path(current_client, @visit)
     end
   end
 
   def update
     if @visit.update(visit_params)
       @visit.inactive!
-      redirect_to doctor_visit_path(@visit)
+      flash[:success] = 'Update was successful'
+      redirect_to doctor_visit_path(current_doctor, @visit)
     else
-      render :edit, notice: 'Failed to update visit'
+      flash[:errors] = @visit.errors.full_messages.join(', ')
+      redirect_to edit_doctor_visit_path(current_doctor, @visit)
     end
   end
 
@@ -49,14 +56,22 @@ class VisitsController < ApplicationController
 
   private
 
+  def current_ability
+    user = current_client || current_doctor
+    @current_ability ||= Ability.new(user)
+  end
+
   def set_visits
     sort_column = params[:sort_column]
 
-    @visits = current_dynamic_user.visits.sort_by { |visit| visit[sort_column] }
+    sorted_visits = @current_dynamic_user.visits.sort_by { |visit| visit[sort_column] }
+    @visits = Kaminari.paginate_array(sorted_visits).page(params[:page]).per(10)
+
+    @total_pages = @visits.total_pages
   end
 
   def set_visit
-    @visit = Visit.find(params[:id])
+    @visit = @current_dynamic_user.visits.find(params[:id])
   end
 
   def check_quantity_visits?

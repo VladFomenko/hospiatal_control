@@ -1,8 +1,13 @@
 <div class="container rounded bg-white mt-5 mb-5">
   <div class="row">
+    <%= render 'shared/flash_msg', flash: flash %>
     <div class="col-md-3 border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-        <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+        <% if @doctor.avatar.attached? %>
+          <%= image_tag @doctor.avatar, class: "rounded-circle mt-5", width: "150px" %>
+        <% else %>
+          <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+        <% end %>
       </div>
     </div>
     <div class="col-md-5 border-right">
@@ -14,29 +19,33 @@
         <div class="row mt-2">
           <div class="col-md-6">
             <label class="labels" for="doctor_first_name">First Name</label>
-            <input type="text" class="form-control" id="doctor_first_name" value="<%= @doctor.first_name %>" readonly disabled />
+            <input type="text" class="form-control" id="doctor_first_name" value="<%= @doctor.first_name %>" readonly disabled/>
           </div>
           <div class="col-md-6">
             <label class="labels" for="doctor_second_name">Surname</label>
-            <input type="text" class="form-control" id="doctor_second_name" value="<%= @doctor.second_name %>" readonly disabled />
+            <input type="text" class="form-control" id="doctor_second_name" value="<%= @doctor.second_name %>" readonly disabled/>
           </div>
           <div class="col-md-6">
             <label class="labels" for="doctor_second_name">Category</label>
-            <% if @doctor.categories.first %>
-              <input type="text" class="form-control" id="doctor_second_name" value="<%= @doctor.categories.first.name %>" readonly disabled />
+            <% if @doctor.category_id.present? %>
+              <input type="text" class="form-control" id="doctor_second_name" value="<%= Category.find(@doctor.category_id).name %>" readonly disabled/>
             <% else %>
-              <input type="text" class="form-control" id="doctor_second_name" value="" readonly disabled />
+              <input type="text" class="form-control" id="doctor_second_name" value="" readonly disabled/>
             <% end %>
           </div>
         </div>
         <div class="row mt-3">
           <div class="col-md-12">
             <label class="labels" for="doctor_phone_number">Phone Number</label>
-            <input type="text" class="form-control" id="doctor_phone_number" value="<%= @doctor.phone_number %>" readonly disabled />
+            <input type="text" class="form-control" id="doctor_phone_number" value="<%= @doctor.phone_number %>" readonly disabled/>
           </div>
         </div>
-
+        <% if current_doctor.present? %>
+          <%= link_to 'Edit', edit_doctor_path(@doctor) %>
+        <% end %>
       </div>
     </div>
+
+    <%#= render "doctors/shared/links" %>
   </div>
 </div>

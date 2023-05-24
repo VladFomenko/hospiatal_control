@@ -1,0 +1,51 @@
+<%= render 'shared/flash_msg', flash: flash %>
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <% if @doctor.avatar.attached? %>
+          <%= image_tag @doctor.avatar, class: "rounded-circle mt-5", width: "150px" %>
+        <% else %>
+          <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg">
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-5 border-right">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h4 class="text-right"><%= @doctor.first_name + ' ' + @doctor.second_name %> </h4>
+        </div>
+
+        <%= form_for @doctor, url: doctor_path(@doctor), method: :patch do |f| %>
+          <%= f.file_field :avatar %>
+          <div class="row mt-2">
+            <div class="col-md-6">
+              <label class="labels" for="doctor_first_name">First Name</label>
+              <%= f.text_field :first_name, class: 'form-control', id: 'doctor_first_name' %>
+            </div>
+            <div class="col-md-6">
+              <label class="labels" for="doctor_second_name">Surname</label>
+              <%= f.text_field :second_name, class: 'form-control', id: 'doctor_second_name' %>
+            </div>
+            <div class="col-md-6">
+              <label class="labels" for="doctor_category">Category</label>
+              <% if @doctor.category_id.present? %>
+                <%= f.collection_select :category_id, Category.all, :id, :name, { selected: @doctor.category.id }, class: 'form-control', id: 'doctor_category' %>
+              <% else %>
+                <%= f.collection_select :category_id, Category.all, :id, :name, { prompt: 'Select category' }, class: 'form-control', id: 'category' %>
+              <% end %>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label class="labels" for="doctor_phone_number">Phone Number</label>
+              <%= f.text_field :phone_number, class: 'form-control', id: 'doctor_phone_number' %>
+            </div>
+          </div>
+          <%= f.submit 'Save', class: 'btn btn-primary' %>
+      <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

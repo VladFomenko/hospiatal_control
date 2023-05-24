@@ -7,9 +7,11 @@ class Doctor < ApplicationRecord
          :recoverable, :rememberable, :validatable
   include Doctorable
 
+  has_one_attached :avatar
+
   has_many :visits, dependent: :destroy
   has_many :clients, through: :visits
-  has_many :categories, dependent: :destroy
+  belongs_to :category, optional: true
 
   def email_required?
     false

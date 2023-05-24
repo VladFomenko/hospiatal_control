@@ -16,14 +16,25 @@
   <% @visits.each.with_index do |visit, index| %>
     <tr>
       <th scope="row"><%= index + 1 %></th>
-      <td><%= link_to visit.date_of_visit.strftime('%d.%m.%Y'), client_visit_path(client_id: visit.client_id, id: visit.id) %></td>
+      <% if current_client %>
+        <td><%= link_to visit.date_of_visit.strftime('%d.%m.%Y'), client_visit_path(client_id: visit.client_id, id: visit.id) %></td>
+      <% elsif current_doctor %>
+        <td><%= link_to visit.date_of_visit.strftime('%d.%m.%Y'), doctor_visit_path(client_id: visit.client_id, id: visit.id) %></td>
+      <% else %>
+        <td><%= link_to visit.date_of_visit.strftime('%d.%m.%Y') %></td>
+      <% end %>
       <td><%= visit.status %></td>
       <% if current_client.present? %>
         <td><%= link_to visit.doctor.first_name, doctor_path(visit.doctor) %></td>
       <% else %>
-        <td><%= link_to visit.client.first_name, client_path(visit.client, client: visit.client) %></td>
+        <td><%= link_to visit.client.first_name, client_path(visit.client) %></td>
       <% end %>
-      <td><%= visit.recommendation %></td>
+      <% if visit.recommendation.present? %>
+        <td><%= link_to truncate(visit.recommendation, length: 50), client_visit_path(client_id: visit.client_id, id: visit.id) %></td>
+      <% else %>
+        <td><%= truncate(visit.recommendation, length: 50) %></td>
+      <% end %>
+
       <% if current_doctor %>
         <td><%= link_to 'Add recommendation', edit_doctor_visit_path(current_doctor, visit), method: :patch %></td>
       <% end %>
@@ -31,7 +42,17 @@
   <% end %>
   </tbody>
 </table>
-<% if current_client.present? %>
-  <%= link_to 'Create Visit', new_client_visit_path(current_client), class: 'btn btn-primary' %>
-<% end %>
-
+<div class="container">
+  <% if current_client.present? %>
+    <div class="row justify-content-between mb-3">
+      <div class="col-auto">
+        <%= link_to 'Create Visit', new_client_visit_path(current_client), class: 'btn btn-primary' %>
+      </div>
+    </div>
+  <% end %>
+  <div class="row">
+    <div class="col">
+      <%= render partial: 'shared/pagi', locals: { pages: @visits } %>
+    </div>
+  </div>
+</div>

@@ -6,5 +6,6 @@ module Categorizable
 
   included do
     validate_name(:name)
+    uniq_name_category
   end
 end
