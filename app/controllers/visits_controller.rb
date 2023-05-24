@@ -23,12 +23,11 @@ class VisitsController < ApplicationController
   def create
     @visit ||= @current_dynamic_user.visits.build(visit_params)
 
-    if check_quantity_visits? && @visit.save!
-      redirect_to client_visit_path(current_client, @visit), notice: 'Visit successfully created'
+    if check_quantity_visits? && @visit.save
+      redirect_to client_visit_path(current_client, @visit)
     else
-      flash[:notice] = 'Failed to create visit'
-      flash[:notice_class] = 'alert-danger'
-      render :new
+      check_quantity_visits? ? flash[:errors] = 'Failed to create visit' : flash[:errors] = 'This doctor can no longer have visits'
+      redirect_to new_client_visit_path(current_client, @visit)
     end
   end
 
@@ -38,7 +37,7 @@ class VisitsController < ApplicationController
       flash[:success] = 'Update was successful'
       redirect_to doctor_visit_path(current_doctor, @visit)
     else
-      flash[:success] = @visit.errors.full_messages.join(', ')
+      flash[:errors] = @visit.errors.full_messages.join(', ')
       redirect_to edit_doctor_visit_path(current_doctor, @visit)
     end
   end
@@ -51,9 +50,9 @@ class VisitsController < ApplicationController
     @visit = current_client.visits.build
   end
 
-  # def edit
-  #   @visit
-  # end
+  def edit
+    @visit
+  end
 
   private
 
