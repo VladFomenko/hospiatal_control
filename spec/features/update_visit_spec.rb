@@ -10,7 +10,6 @@ RSpec.describe 'Updating a visit', type: :feature do
   it 'updates a visit with a patient and recommendation' do
     @client = FactoryBot.create(:client)
 
-
     @visit = FactoryBot.create(:visit, doctor: @doctor, client: @client)
 
     visit edit_doctor_visit_path(@doctor, @visit)

@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class DoctorDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -21,7 +21,7 @@ class DoctorDashboard < Administrate::BaseDashboard
     visits: Field::HasMany,
     work_experience: Field::Number,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES

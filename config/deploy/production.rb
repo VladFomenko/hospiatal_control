@@ -1,4 +1,4 @@
-server '64.226.117.60', user: "#{fetch(:user)}", roles: %w{app db web}, primary: true
+server '64.226.117.60', user: "#{fetch(:user)}", roles: %w[app db web], primary: true
 
 set :application, 'hospital_control'
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
