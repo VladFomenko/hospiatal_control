@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_23_110443) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_24_133210) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,10 +44,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_110443) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
-    t.bigint "doctor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["doctor_id"], name: "index_categories_on_doctor_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -76,6 +74,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_110443) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_doctors_on_category_id"
     t.index ["phone_number"], name: "index_doctors_on_phone_number", unique: true
     t.index ["reset_password_token"], name: "index_doctors_on_reset_password_token", unique: true
   end
@@ -94,7 +94,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_23_110443) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "categories", "doctors"
+  add_foreign_key "doctors", "categories"
   add_foreign_key "visits", "clients"
   add_foreign_key "visits", "doctors"
 end
