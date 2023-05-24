@@ -7,6 +7,7 @@ module Doctorable
   included do
     validate_name
     validate_name(:second_name)
+    validate_phone_number
     validate_password
     validate_work_experience
   end

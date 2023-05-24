@@ -77,17 +77,25 @@ gem 'aws-sdk-s3', require: false
 gem 'kaminari', '~> 1.2', '>= 1.2.2'
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  # Use for test
+  gem 'capybara'
+  gem 'rspec-rails'
+
+  # Use for data got DB
+  gem 'factory_bot_rails'
+  gem 'ffaker'
+
+  # Use for debug
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 end
 
 group :development do
   # Use for deploy
   gem 'capistrano'
-  gem 'capistrano-rvm'
-  gem 'capistrano-rails'
   gem 'capistrano3-puma'
   gem 'capistrano-nginx'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
   gem 'capistrano-upload-config'
   gem 'sshkit-sudo'
   # Use console on exceptions pages [https://github.com/rails/web-console]

@@ -26,7 +26,7 @@ class VisitsController < ApplicationController
     if check_quantity_visits? && @visit.save
       redirect_to client_visit_path(current_client, @visit)
     else
-      check_quantity_visits? ? flash[:errors] = 'Failed to create visit' : flash[:errors] = 'This doctor can no longer have visits'
+      flash[:errors] = check_quantity_visits? ? 'Failed to create visit' : 'This doctor can no longer have visits'
       redirect_to new_client_visit_path(current_client, @visit)
     end
   end

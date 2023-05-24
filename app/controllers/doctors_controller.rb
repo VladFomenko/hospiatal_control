@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class DoctorsController < ApplicationController
-  include DoctorableController
-
   before_action :doctor_params, only: %i[create update]
   before_action :set_doctors, only: :index
   before_action :set_doctor, only: %i[show update destroy]

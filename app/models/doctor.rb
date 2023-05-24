@@ -7,11 +7,15 @@ class Doctor < ApplicationRecord
          :recoverable, :rememberable, :validatable
   include Doctorable
 
+  before_validation :normalize_phone_number
+
   has_one_attached :avatar
 
   has_many :visits, dependent: :destroy
   has_many :clients, through: :visits
   belongs_to :category, optional: true
+
+  private
 
   def email_required?
     false
@@ -23,5 +27,9 @@ class Doctor < ApplicationRecord
 
   def will_save_change_to_email?
     false
+  end
+
+  def normalize_phone_number
+    phone_number.gsub!(/[\s-]/, '')
   end
 end

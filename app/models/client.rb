@@ -7,6 +7,8 @@ class Client < ApplicationRecord
          :recoverable, :rememberable, :validatable
   include Clientable
 
+  before_validation :normalize_phone_number
+
   has_one_attached :avatar
 
   has_many :visits, dependent: :destroy
@@ -22,5 +24,9 @@ class Client < ApplicationRecord
 
   def will_save_change_to_email?
     false
+  end
+
+  def normalize_phone_number
+    phone_number.gsub!(/[\s-]/, '')
   end
 end

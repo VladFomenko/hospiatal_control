@@ -1,4 +1,4 @@
-require "administrate/base_dashboard"
+require 'administrate/base_dashboard'
 
 class VisitDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -13,9 +13,11 @@ class VisitDashboard < Administrate::BaseDashboard
     date_of_visit: Field::DateTime,
     doctor: Field::BelongsTo,
     recommendation: Field::Text,
-    status: Field::Select.with_options(searchable: false, collection: ->(field) { field.resource.class.send(field.attribute.to_s.pluralize).keys }),
+    status: Field::Select.with_options(searchable: false, collection: lambda { |field|
+                                                                        field.resource.class.send(field.attribute.to_s.pluralize).keys
+                                                                      }),
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
