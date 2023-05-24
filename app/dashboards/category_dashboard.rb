@@ -9,7 +9,7 @@ class CategoryDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    doctor: Field::BelongsTo,
+    doctor: Field::HasMany,
     name: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,

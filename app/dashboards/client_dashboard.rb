@@ -57,16 +57,11 @@ class ClientDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-    birth_date
-    doctors
-    encrypted_password
     first_name
-    phone_number
-    remember_created_at
-    reset_password_sent_at
-    reset_password_token
     second_name
-    visits
+    birth_date
+    phone_number
+    encrypted_password
   ].freeze
 
   # COLLECTION_FILTERS
