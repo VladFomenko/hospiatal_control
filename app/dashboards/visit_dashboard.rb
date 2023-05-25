@@ -11,10 +11,10 @@ class VisitDashboard < Administrate::BaseDashboard
     id: Field::Number,
     date_of_visit: Field::DateTime,
     client: Field::BelongsTo.with_options(
-      display_name: ->(client) { client.name }
+      display_name: ->(client) { "#{client.first_name} #{client.second_name}" }
     ),
     doctor: Field::BelongsTo.with_options(
-      display_name: ->(doctor) { doctor.name }
+      display_name: ->(doctor) { "#{doctor.first_name} #{doctor.second_name}, category: #{Category.find(doctor.category).name }" }
     ),
     recommendation: Field::Text,
     status: Field::Select.with_options(searchable: false, collection: lambda { |field|
