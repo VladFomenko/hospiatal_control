@@ -9,7 +9,9 @@ class DoctorDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    category: Field::BelongsTo,
+    category: Field::BelongsTo.with_options(
+      display_name: ->(category) { category.name }
+    ),
     clients: Field::HasMany,
     encrypted_password: Field::String,
     first_name: Field::String,
@@ -31,6 +33,10 @@ class DoctorDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
     id
+    first_name
+    second_name
+    phone_number
+    work_experience
     category
   ].freeze
 

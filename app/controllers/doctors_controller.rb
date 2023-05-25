@@ -18,7 +18,7 @@ class DoctorsController < ApplicationController
   def create; end
 
   def update
-    if @doctor.update!(doctor_params)
+    if @doctor.update(doctor_params)
       flash[:success] = 'Update was successful'
       redirect_to doctor_path(@doctor)
     else

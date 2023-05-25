@@ -1,24 +1,34 @@
-# README test
+# Project name
+## Hospital control
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Project Description
+Hospital Control is a web application that allows you to register
+a doctor and a patient. Create patient visits to the doctor, 
+the doctor can write out recommendations. The application was 
+created using the Ruby on Rails framework version 7.0.4 and the 
+Ruby programming language version 3.1.2.
 
-Things you may want to cover:
+# Main features
+- Create and edit a patient
+- Create, edit a doctor
+- Ability to make an appointment
+- Ability to make a recommendation to a doctor
 
-* Ruby version
+# Installation instructions
+Download the repository with the application to your computer
+[repo](git@github.com:VladFomenko/hospital_control.git)
+Install Ruby version 3.1.2 and Rails version 7.0.4.
+Install all necessary dependencies by running```bundle install``` command.
+Create a database by running the commands```rails db:create``` and ```rails db:migrate```.
+Start the server by running the rails server command. Also you need to create .env in config directory(rename .env_example)
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# Use of technology
+- ruby 3.0.3
+- rails 7.0.4
+- devise
+- administer
+- cancancan
+- amazon s3
+- Rspec
+- Capybara
+- Bootstrap
