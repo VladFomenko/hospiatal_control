@@ -9,13 +9,17 @@ class VisitDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    client: Field::BelongsTo,
     date_of_visit: Field::DateTime,
-    doctor: Field::BelongsTo,
+    client: Field::BelongsTo.with_options(
+      display_name: ->(client) { client.name }
+    ),
+    doctor: Field::BelongsTo.with_options(
+      display_name: ->(doctor) { doctor.name }
+    ),
     recommendation: Field::Text,
     status: Field::Select.with_options(searchable: false, collection: lambda { |field|
-                                                                        field.resource.class.send(field.attribute.to_s.pluralize).keys
-                                                                      }),
+      field.resource.class.send(field.attribute.to_s.pluralize).keys
+    }),
     created_at: Field::DateTime,
     updated_at: Field::DateTime
   }.freeze
