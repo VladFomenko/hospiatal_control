@@ -4,7 +4,6 @@ class CategoriesController < ApplicationController
   before_action :category_params, only: %i[create update]
   before_action :set_categories, only: :index
   before_action :set_category, only: %i[show update destroy]
-  before_action :set_doctor, only: %i[]
 
   def index
     @categories
@@ -15,13 +14,23 @@ class CategoriesController < ApplicationController
   end
 
   def create
-    category = Category.create(category_params)
-
-    return unless category.save
+    if @category.create(category_params)
+      flash[:success] = 'Update was successful'
+      redirect_to category_path(@category)
+    else
+      flash[:errors] = @category.errors.full_messages.join(', ')
+      redirect_to new_category_path(@category)
+    end
   end
 
   def update
-    return unless @category.update(category_params)
+    if @category.update(category_params)
+      flash[:success] = 'Update was successful'
+      redirect_to category_path(@category)
+    else
+      flash[:errors] = @category.errors.full_messages.join(', ')
+      redirect_to new_category_path(@category)
+    end
   end
 
   def destroy
@@ -30,16 +39,12 @@ class CategoriesController < ApplicationController
 
   private
 
-  def set_doctor
-    @doctor = Doctor.find(params[:doctor_id])
-  end
-
   def set_categories
-    @categories = category.all
+    @categories = Category.all
   end
 
   def set_category
-    @category = category.find(params[:id])
+    @category = Category.find(params[:id])
   end
 
   def category_params
