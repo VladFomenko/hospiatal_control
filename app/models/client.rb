@@ -11,7 +11,7 @@ class Client < ApplicationRecord
 
   has_one_attached :avatar
 
-  has_many :visits, dependent: :destroy
+  has_many :visits, dependent: :destroy, counter_cache: true
   has_many :doctors, through: :visits
 
   def email_required?
