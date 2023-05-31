@@ -11,11 +11,10 @@ class VisitDashboard < Administrate::BaseDashboard
     id: Field::Number,
     date_of_visit: Field::DateTime,
     client: Field::BelongsTo.with_options(
-      display_name: ->(client) { "#{client.first_name} #{client.second_name}" }
+      searchable: true,
+      searchable_fields: ['first_name']
     ),
-    doctor: Field::BelongsTo.with_options(
-      display_name: ->(doctor) { "#{doctor.first_name} #{doctor.second_name}, category: #{Category.find(doctor.category).name }" }
-    ),
+    doctor: Field::BelongsTo,
     recommendation: Field::Text,
     status: Field::Select.with_options(searchable: false, collection: lambda { |field|
       field.resource.class.send(field.attribute.to_s.pluralize).keys
@@ -34,6 +33,7 @@ class VisitDashboard < Administrate::BaseDashboard
     client
     doctor
     date_of_visit
+    status
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
