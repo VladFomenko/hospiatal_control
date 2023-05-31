@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Visit < ApplicationRecord
-  include Validatable
+  include Visitable
 
   belongs_to :doctor, counter_cache: true
   belongs_to :client
