@@ -3,5 +3,5 @@
 class Category < ApplicationRecord
   include Categorizable
 
-  has_many :doctor, counter_cache: true
+  has_many :doctor
 end

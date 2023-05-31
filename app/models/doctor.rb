@@ -13,7 +13,8 @@ class Doctor < ApplicationRecord
 
   has_many :visits, dependent: :destroy
   has_many :clients, through: :visits
-  belongs_to :category, optional: true
+  belongs_to :category, optional: true, counter_cache: true
+
 
   private
 
