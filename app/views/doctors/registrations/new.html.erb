@@ -1,51 +1,60 @@
-<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
-  <div class="col-12">
-    <div class="container d-flex justify-content-center">
+<div class='row justify-content-center align-items-center' style='min-height: 70vh;'>
+  <div class='col-12'>
+    <div class='container d-flex justify-content-center'>
       <div>
-        <h2>Sign up a Doctor</h2>
+        <h2>Sign up as a Doctor</h2>
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= render "doctors/shared/error_messages", resource: resource %>
+          <%= render 'doctors/shared/error_messages', resource: resource %>
 
-          <div class="field">
-            <%= f.label :first_name %><br/>
-            <%= f.text_field :first_name, autofocus: true, autocomplete: 'first name' %>
+          <div class="field mb-3">
+            <%= f.label :first_name, class: 'form-label' %><br/>
+            <%= f.text_field :first_name, autofocus: true, autocomplete: 'first name', class: 'form-control' %>
+            <div class='form-text'>Minimum 2 letters, only latin, space, hyphen</div>
           </div>
 
-          <div class='field'>
-            <%= f.label :second_name %><br/>
-            <%= f.text_field :second_name, autofocus: true, autocomplete: 'second name' %>
+
+          <div class='field mb-1'>
+            <%= f.label :second_name, class: 'form-label' %><br/>
+            <%= f.text_field :second_name, autofocus: true, autocomplete: 'second name', class: 'form-control'  %>
+            <div class='form-text'>Minimum 2 letters, only latin, space, hyphen</div>
           </div>
 
-          <div class='field'>
-            <%= f.label :work_experience %><br/>
-            <%= f.number_field :work_experience, autofocus: true, autocomplete: 'work experience', placeholder: 'Month' %>
+          <div class='field mb-1'>
+            <%= f.label :phone_number, class: 'form-label' %><br/>
+            <%= f.text_field :phone_number, autofocus: true, autocomplete: 'phone number', class: 'form-control'  %>
+            <div class='form-text'>Use this format +38(XXX)XXX-XX-XX</div>
           </div>
 
-          <div class='field'>
-            <%= f.label :phone_number %><br/>
-            <%= f.text_field :phone_number, autofocus: true, autocomplete: 'phone number' %>
+          <div class='field mb-1'>
+            <%= f.label :work_experience, class: 'form-label' %><br/>
+            <%= f.number_field :work_experience, autofocus: true, autocomplete: 'work experience', placeholder: 'Month', class: 'form-control'  %>
+            <div class='form-text'>Enter your work experience in months</div>
           </div>
 
-          <div class="field">
-            <%= f.label :password %>
+          <div class='field mb-1'>
+            <%= f.label :password, class: 'form-label' %>
             <% if @minimum_password_length %>
               <em>(<%= @minimum_password_length %> characters minimum)</em>
             <% end %><br/>
-            <%= f.password_field :password, autocomplete: "new-password" %>
+            <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control'  %>
+            <div class='form-text'></div>
           </div>
 
-          <div class="field">
-            <%= f.label :password_confirmation %><br/>
-            <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+          <div class='field mb-1'>
+            <%= f.label :password_confirmation, class: 'form-label' %><br/>
+            <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'  %>
+            <div class='form-text'></div>
           </div>
 
-          <div class="actions">
-            <%= f.submit "Sign up" %>
+          <div class='mb-1'>
+            <%= f.submit 'Sign up', class: 'actions btn btn-primary' %>
           </div>
         <% end %>
 
-        <%= render 'doctors/shared/links' %>
+        <div class='mb-1'>
+          <%= render 'doctors/shared/links' %>
+        </div>
       </div>
     </div>
   </div>
