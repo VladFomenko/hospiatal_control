@@ -5,8 +5,6 @@ module Visitable
   include Validatable
 
   included do
-    date_of_visit
-    status
-    validate_recommendation
+    validate_date_of_visit
   end
 end

@@ -10,7 +10,9 @@ class DoctorDashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     id: Field::Number,
     category: Field::BelongsTo.with_options(
-      display_name: ->(category) { category.name }
+      searchable: true,
+      searchable_fields: ['name'],
+      display_name: ->(doctor) { doctor.category&.name }
     ),
     clients: Field::HasMany,
     encrypted_password: Field::String,
@@ -38,23 +40,20 @@ class DoctorDashboard < Administrate::BaseDashboard
     phone_number
     work_experience
     category
+    visits
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
     id
-    category
-    clients
-    encrypted_password
     first_name
-    phone_number
-    remember_created_at
-    reset_password_sent_at
-    reset_password_token
     second_name
-    visits
+    phone_number
+    category
     work_experience
+    visits
+    clients
     created_at
     updated_at
   ].freeze

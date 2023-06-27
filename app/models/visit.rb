@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class Visit < ApplicationRecord
-  include Validatable
+  include Visitable
 
-  belongs_to :doctor
-  belongs_to :client
+  belongs_to :doctor, counter_cache: true
+  belongs_to :client, counter_cache: true
 
   enum status: %i[active inactive]
 end

@@ -15,7 +15,8 @@ module Validatable
     end
 
     def self.validate_birth_date
-      validates :birth_date, comparison: { less_than_or_equal_to: Constable::AGE_OF_ADULT }
+      validates :birth_date, comparison: { less_than_or_equal_to: Constable::AGE_OF_ADULT,
+                                           message: 'Patient must be adult' }
     end
 
     def self.validate_phone_number
@@ -44,14 +45,13 @@ module Validatable
                                   numericality: true
     end
 
-    def self.validate_recommendation
-      validates :recommendation,
-                format: { with: Constable::RANGE_RECOMMENDATION_LENGTH,
-                          message: 'Your recommendation must have to 200..3000 symbol' }
-    end
-
     def self.uniq_name_category
       validates :name, uniqueness: true
+    end
+
+    def self.validate_date_of_visit
+      validates :date_of_visit, comparison: { greater_than_or_equal_to: Date.current,
+                                              message: 'The date of the visit must be today or later' }
     end
   end
 
@@ -59,5 +59,9 @@ module Validatable
 
   def password_required?
     attribute_changed?(:password)
+  end
+
+  def recommendation_required?
+    attribute_changed?(:recommendation)
   end
 end
