@@ -34,28 +34,26 @@
 
           <div class='field mb-1'>
             <%= f.label :password, class: 'form-label' %>
-            <%# if @minimum_password_length %>
-<!--              <em>(<%#= @minimum_password_length %> characters minimum)</em>-->
-<!--            <%# end %><br/>-->
             <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control'  %>
-            <div class='form-text'>Enter your work experience in months</div>
+            <div class='form-text'>min 6 symbols, min 1 up and 1 low, min 1 number</div>
             <div class='form-text'></div>
           </div>
 
           <div class='field mb-1'>
             <%= f.label :password_confirmation, class: 'form-label' %><br/>
             <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control'  %>
+            <div class='form-text'>min 6 symbols, min 1 up and 1 low, min 1 number</div>
             <div class='form-text'></div>
           </div>
 
           <div class='mb-1'>
             <div class="row">
               <div class="col" style="width: 30%;">
-                <%= link_to 'Log in', new_session_path(resource_name), class: 'actions btn btn-primary w-100' %>
+                <%= f.submit 'Sign up', class: 'actions btn btn-primary w-100' %>
               </div>
               <div class="col" style="width: 40%;"></div>
               <div class="col" style="width: 30%;">
-                <%= f.submit 'Sign up', class: 'actions btn btn-primary w-100' %>
+                <%= link_to 'Log in', new_session_path(resource_name), class: 'actions btn btn-primary w-100' %>
               </div>
             </div>
           </div>
