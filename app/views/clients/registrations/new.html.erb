@@ -1,50 +1,58 @@
-<div class="row justify-content-center align-items-center" style="min-height: 70vh;">
-  <div class="col-12">
-    <div class="container d-flex justify-content-center">
+<div class='row justify-content-center align-items-center' style='min-height: 70vh;'>
+  <div class='col-12'>
+    <div class='container d-flex justify-content-center'>
       <div>
         <h2>Sign up a Patient</h2>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <%= render 'clients/shared/error_messages', resource: resource %>
 
-          <div class='field'>
-            <%= f.label :first_name %><br/>
-            <%= f.text_field :first_name, autofocus: true, autocomplete: 'first name' %>
+          <div class='field mb-3'>
+            <%= f.label :first_name, class: 'form-label' %><br/>
+            <%= f.text_field :first_name, autofocus: true, autocomplete: 'first name', class: 'form-control' %>
+            <div class='form-text'>Minimum 2 letters, only latin, space, hyphen</div>
           </div>
 
-          <div class='field'>
-            <%= f.label :second_name %><br/>
-            <%= f.text_field :second_name, autofocus: true, autocomplete: 'second name' %>
+          <div class='field mb-1'>
+            <%= f.label :second_name, class: 'form-label' %><br/>
+            <%= f.text_field :second_name, autofocus: true, autocomplete: 'second name', class: 'form-control' %>
+            <div class='form-text'>Minimum 2 letters, only latin, space, hyphen</div>
           </div>
 
-          <div class='field'>
-            <%= f.label :birth_date %><br/>
-            <%= f.date_field :birth_date, autofocus: true, autocomplete: 'birth date' %>
+          <div class='field mb-1'>
+            <%= f.label :birth_date, class: 'form-label' %><br/>
+            <%= f.date_field :birth_date, autofocus: true, autocomplete: 'birth date', class: 'form-control' %>
           </div>
 
-          <div class='field'>
-            <%= f.label :phone_number %><br/>
-            <%= f.text_field :phone_number, autofocus: true, autocomplete: 'phone number' %>
+          <div class='field mb-1'>
+            <%= f.label :phone_number, class: 'form-label' %><br/>
+            <%= f.text_field :phone_number, autofocus: true, autocomplete: 'phone number', class: 'form-control' %>
+            <div class='form-text'>Use this format +38(XXX)XXX-XX-XX</div>
           </div>
 
-          <div class='field'>
-            <%= f.label :password %>
-            <% if @minimum_password_length %>
-              <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br/>
-            <%= f.password_field :password, autocomplete: 'new-password' %>
+          <div class='field mb-1'>
+            <%= f.label :password, class: 'form-label' %>
+            <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
+            <div class='form-text'>Min 6 symbols, min 1 up and 1 low, min 1 number</div>
           </div>
 
-          <div class='field'>
-            <%= f.label :password_confirmation %><br/>
-            <%= f.password_field :password_confirmation, autocomplete: 'new-password' %>
+          <div class='field mb-1'>
+            <%= f.label :password_confirmation, class: 'form-label' %><br/>
+            <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control' %>
+            <div class='form-text'>Min 6 symbols, min 1 up and 1 low, min 1 number</div>
           </div>
 
-          <div class='actions'>
-            <%= f.submit 'Sign up' %>
+          <div class='mb-1'>
+            <div class='row'>
+              <div class='col' style='width: 30%;'>
+                <%= f.submit 'Sign up', class: 'actions btn btn-primary w-100' %>
+              </div>
+              <div class='col' style='width: 40%;'></div>
+              <div class='col' style='width: 30%;'>
+                <%= link_to 'Log in', new_session_path(resource_name), class: 'actions btn btn-primary w-100' %>
+              </div>
+            </div>
           </div>
         <% end %>
-
-        <%= render 'clients/shared/links' %>
       </div>
     </div>
   </div>
