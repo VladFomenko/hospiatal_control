@@ -5,41 +5,41 @@
         <h2>Sign up as a Doctor</h2>
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-          <%= render 'doctors/shared/error_messages', resource: resource %>
+          <% error_attrs = error_attributes(resource) %>
 
           <div class='field mb-3'>
-            <%= f.label :first_name, class: 'form-label' %><br/>
-            <%= f.text_field :first_name, autofocus: true, autocomplete: 'first name', class: 'form-control' %>
+            <%= f.label :first_name, class: 'form-label' %>
+            <%= f.text_field :first_name, autofocus: true, autocomplete: 'first name', class: "form-control #{'is-invalid' if error_attrs.include?(:first_name)}" %>
             <div class='form-text'>Minimum 2 letters, only latin, space, hyphen</div>
           </div>
 
           <div class='field mb-1'>
-            <%= f.label :second_name, class: 'form-label' %><br/>
-            <%= f.text_field :second_name, autofocus: true, autocomplete: 'second name', class: 'form-control' %>
+            <%= f.label :second_name, class: 'form-label' %>
+            <%= f.text_field :second_name, autofocus: true, autocomplete: 'second name', class: "form-control #{'is-invalid' if error_attrs.include?(:second_name)}" %>
             <div class='form-text'>Minimum 2 letters, only latin, space, hyphen</div>
           </div>
 
           <div class='field mb-1'>
-            <%= f.label :phone_number, class: 'form-label' %><br/>
-            <%= f.text_field :phone_number, autofocus: true, autocomplete: 'phone number', class: 'form-control' %>
+            <%= f.label :phone_number, class: 'form-label' %>
+            <%= f.text_field :phone_number, autofocus: true, autocomplete: 'phone number', class: "form-control #{'is-invalid' if error_attrs.include?(:phone_number)}" %>
             <div class='form-text'>Use this format +38(XXX)XXX-XX-XX</div>
           </div>
 
           <div class='field mb-1'>
-            <%= f.label :work_experience, class: 'form-label' %><br/>
-            <%= f.number_field :work_experience, autofocus: true, autocomplete: 'work experience', placeholder: 'Month', class: 'form-control' %>
+            <%= f.label :work_experience, class: 'form-label' %>
+            <%= f.number_field :work_experience, autofocus: true, autocomplete: 'work experience', placeholder: 'Month', class: "form-control #{'is-invalid' if error_attrs.include?(:work_experience)}" %>
             <div class='form-text'>Enter your work experience in months</div>
           </div>
 
           <div class='field mb-1'>
             <%= f.label :password, class: 'form-label' %>
-            <%= f.password_field :password, autocomplete: 'new-password', class: 'form-control' %>
+            <%= f.password_field :password, autocomplete: 'new-password', class: "form-control #{'is-invalid' if error_attrs.include?(:password)}" %>
             <div class='form-text'>Min 6 symbols, min 1 up and 1 low, min 1 number</div>
           </div>
 
           <div class='field mb-1'>
-            <%= f.label :password_confirmation, class: 'form-label' %><br/>
-            <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: 'form-control' %>
+            <%= f.label :password_confirmation, class: 'form-label' %>
+            <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: "form-control #{'is-invalid' if error_attrs.include?(:password_confirmation)}" %>
             <div class='form-text'>Min 6 symbols, min 1 up and 1 low, min 1 number</div>
           </div>
 
