@@ -29,7 +29,6 @@ module Validatable
                                  message: 'First symbol must be plus and after it only numbers'
                                }
     end
-
     def self.validate_password
       validates :password, presence: true,
                            length: Constable::RANGE_PASSWORD_LENGTH,
@@ -37,7 +36,9 @@ module Validatable
                              with: Constable::REGEXP_PASSWORD,
                              message: 'Only English letters, must contain at least one capital letter,
                                      1 lowercase letter and 1 number'
-                           }, if: :password_required?
+                           }
+      validates :password_confirmation, presence: true
+      validates_confirmation_of :password
     end
 
     def self.validate_work_experience
@@ -56,10 +57,6 @@ module Validatable
   end
 
   private
-
-  def password_required?
-    attribute_changed?(:password)
-  end
 
   def recommendation_required?
     attribute_changed?(:recommendation)
