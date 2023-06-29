@@ -1,4 +1,8 @@
+# frozen_string_literal: true
+
 module ApplicationHelper
+  include ErrorsHelper
+
   def bootstrap_class_for(flash_type)
     case flash_type.to_sym
     when :success
