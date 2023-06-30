@@ -1,13 +1,16 @@
 <div class='row justify-content-center align-items-center' style='min-height: 70vh;'>
   <div class='col-12'>
     <div class='container d-flex justify-content-center'>
-      <div id='notice-container'></div>
       <div>
         <h2>Sign up as a Doctor</h2>
 
+        <div id='notice-container'>
+          <%= password_confirmation_error(resource) %>
+          <%= phone_number_existence_error(resource) %>
+        </div>
+
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <% error_attrs = error_attributes(resource) %>
-          <%= password_confirmation_error(resource) %>
 
           <div class='field mb-3'>
             <%= f.label :first_name, class: 'form-label' %>

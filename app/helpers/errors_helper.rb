@@ -10,4 +10,10 @@ module ErrorsHelper
       content_tag(:div, 'Passwords do not match', class: 'alert alert-danger', role: 'alert')
     end
   end
+
+  def phone_number_existence_error(resource)
+    if resource.errors.map(&:message).include?('Phone number is already insulated')
+      content_tag(:div, 'Phone number is already insulated', class: 'alert alert-danger', role: 'alert')
+    end
+  end
 end
