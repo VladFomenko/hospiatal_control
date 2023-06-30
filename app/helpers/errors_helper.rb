@@ -13,7 +13,7 @@ module ErrorsHelper
 
   def phone_number_existence_error(resource)
     if resource.errors.map(&:message).include?('Phone number is already insulated')
-      content_tag(:div, 'Phone number is already insulated', class: 'alert alert-danger', role: 'alert')
+      content_tag(:div, 'Phone number is already registered', class: 'alert alert-danger', role: 'alert')
     end
   end
 end
