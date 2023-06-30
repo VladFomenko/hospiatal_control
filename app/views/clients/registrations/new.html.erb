@@ -3,6 +3,12 @@
     <div class='container d-flex justify-content-center'>
       <div>
         <h2>Sign up a Patient</h2>
+
+        <div id='notice-container'>
+          <%= password_confirmation_error(resource) %>
+          <%= phone_number_existence_error(resource) %>
+        </div>
+
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <% error_attrs = error_attributes(resource) %>
 
@@ -37,7 +43,7 @@
 
           <div class='field mb-1'>
             <%= f.label :password_confirmation, class: 'form-label' %>
-            <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: "form-control #{'is-invalid' if error_attrs.include?(:password_confirmation)}" %>
+            <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: "form-control #{'is-invalid' if error_attrs.include?(:password)}" %>
             <div class='form-text'>Min 6 symbols, min 1 up and 1 low, min 1 number</div>
           </div>
 
