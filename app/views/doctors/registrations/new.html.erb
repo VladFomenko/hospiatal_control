@@ -27,7 +27,7 @@
 
           <div class='field mb-1'>
             <%= f.label :work_experience, class: 'form-label' %>
-            <%= f.number_field :work_experience, autofocus: true, autocomplete: 'work experience', placeholder: 'Month', class: "form-control #{'is-invalid' if error_attrs.include?(:work_experience)}" %>
+            <%= f.number_field :work_experience, min: 1, autofocus: true, autocomplete: 'work experience', placeholder: 'Month', class: "form-control #{'is-invalid' if error_attrs.include?(:work_experience)}" %>
             <div class='form-text'>Enter your work experience in months</div>
           </div>
 
