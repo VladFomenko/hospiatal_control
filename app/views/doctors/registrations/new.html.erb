@@ -1,11 +1,13 @@
 <div class='row justify-content-center align-items-center' style='min-height: 70vh;'>
   <div class='col-12'>
     <div class='container d-flex justify-content-center'>
+      <div id='notice-container'></div>
       <div>
         <h2>Sign up as a Doctor</h2>
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
           <% error_attrs = error_attributes(resource) %>
+          <%= password_confirmation_error(resource) %>
 
           <div class='field mb-3'>
             <%= f.label :first_name, class: 'form-label' %>
@@ -39,7 +41,7 @@
 
           <div class='field mb-1'>
             <%= f.label :password_confirmation, class: 'form-label' %>
-            <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: "form-control #{'is-invalid' if error_attrs.include?(:password_confirmation)}" %>
+            <%= f.password_field :password_confirmation, autocomplete: 'new-password', class: "form-control #{'is-invalid' if error_attrs.include?(:password)}" %>
             <div class='form-text'>Min 6 symbols, min 1 up and 1 low, min 1 number</div>
           </div>
 
