@@ -21,14 +21,15 @@ module Validatable
 
     def self.validate_phone_number
       validates :phone_number, presence: true,
-                               uniqueness: true,
                                numericality: true,
                                length: Constable::RANGE_NAME_LENGTH,
                                format: {
                                  with: Constable::REGEXP_PHONE_NUMBER,
                                  message: 'First symbol must be plus and after it only numbers'
-                               }
+                               },
+                               uniqueness: { message: 'Phone number is already insulated' }
     end
+
     def self.validate_password
       validates :password, presence: true,
                            length: Constable::RANGE_PASSWORD_LENGTH,
