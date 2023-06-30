@@ -37,8 +37,8 @@ module Validatable
                              message: 'Only English letters, must contain at least one capital letter,
                                      1 lowercase letter and 1 number'
                            }
-      validates :password_confirmation, presence: true
-      validates_confirmation_of :password
+      validates :password_confirmation, presence: true, if: -> { password.present? }
+      validates_confirmation_of :password, if: -> { password.present? }
     end
 
     def self.validate_work_experience
