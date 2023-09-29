@@ -26,6 +26,6 @@ module Constable
                            'General practitioner'].freeze
 
   REGEXP_NAME = /\A[A-Za-z]+([- ]?[A-Za-z]+)*\z/
-  REGEXP_PHONE_NUMBER = /\A\+\d{9,15}\z/
+  REGEXP_PHONE_NUMBER = /\A\+\d{12,15}\z/
   REGEXP_PASSWORD = /\A(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[a-zA-Z\d]+\z/
 end
