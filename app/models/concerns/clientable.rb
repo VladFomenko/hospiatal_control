@@ -10,5 +10,7 @@ module Clientable
     validate_birth_date
     validate_phone_number
     validate_password
+    validate :phone_number_exist, on: :login
+    validate :password_exist, on: :login
   end
 end
