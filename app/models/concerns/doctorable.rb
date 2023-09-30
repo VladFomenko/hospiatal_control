@@ -10,5 +10,7 @@ module Doctorable
     validate_phone_number
     validate_password
     validate_work_experience
+    validate :phone_number_exist, on: :login
+    validate :password_exist, on: :login
   end
 end

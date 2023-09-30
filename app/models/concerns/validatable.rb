@@ -21,13 +21,13 @@ module Validatable
 
     def self.validate_phone_number
       validates :phone_number, presence: true,
-                               uniqueness: true,
                                numericality: true,
                                length: Constable::RANGE_NAME_LENGTH,
                                format: {
                                  with: Constable::REGEXP_PHONE_NUMBER,
                                  message: 'First symbol must be plus and after it only numbers'
-                               }
+                               },
+                               uniqueness: { message: 'Phone number is already insulated' }
     end
 
     def self.validate_password
@@ -37,7 +37,7 @@ module Validatable
                              with: Constable::REGEXP_PASSWORD,
                              message: 'Only English letters, must contain at least one capital letter,
                                      1 lowercase letter and 1 number'
-                           }, if: :password_required?
+                           }, unless: Proc.new { |a| a.password.blank? }
     end
 
     def self.validate_work_experience
@@ -53,12 +53,33 @@ module Validatable
       validates :date_of_visit, comparison: { greater_than_or_equal_to: Date.current,
                                               message: 'The date of the visit must be today or later' }
     end
+
+    # TODO: need to test
+    def phone_number_exist
+      user = user_definition.find_by(phone_number: phone_number)
+
+      return if user
+
+      errors.add(:phone_number, 'User with this phone number does not exist')
+    end
+
+    # TODO: need to test
+    def password_exist
+      user = resource_class.find_by(phone_number: resource.phone_number)
+      return unless user
+
+      return if user.valid_password?(resource.password)
+
+      errors.add(:password, 'Invalid password')
+    end
   end
 
   private
 
-  def password_required?
-    attribute_changed?(:password)
+  def user_definition
+    user_models = { Doctor: Doctor, Client: Client }
+
+    user_models[self.class]
   end
 
   def recommendation_required?
