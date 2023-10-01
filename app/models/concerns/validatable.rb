@@ -37,7 +37,7 @@ module Validatable
                              with: Constable::REGEXP_PASSWORD,
                              message: 'Only English letters, must contain at least one capital letter,
                                      1 lowercase letter and 1 number'
-                           }, unless: Proc.new { |a| a.password.blank? }
+                           }, if: :new_record?
     end
 
     def self.validate_work_experience
