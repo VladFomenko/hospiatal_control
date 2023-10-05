@@ -31,7 +31,7 @@ module Validatable
     end
 
     def self.validate_password
-      validates :password, presence: true,
+      validates :password, presence: true, confirmation: true,
                            length: Constable::RANGE_PASSWORD_LENGTH,
                            format: {
                              with: Constable::REGEXP_PASSWORD,
