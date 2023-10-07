@@ -4,6 +4,16 @@
       <div>
         <h2>Log in</h2>
 
+        <div id='notice-container'>
+          <% flash.each do |key, value| %>
+            <% if value == 'Incorrect phone number or password' %>
+              <div class="alert alert-danger">
+                <%= value %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+
         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
           <div class='field mb-1'>
